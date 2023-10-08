@@ -31,7 +31,7 @@ app.post("/submit", async (req, res) => {
 
   console.log(name);
   const newData = new data({
-    fullname: name,
+    fullName: name,
     branch: "demo",
     email: "demo",
     prn: "demo",
