@@ -27,19 +27,24 @@ app.get("/", (req, res) => {
 });
 
 app.post("/submit", async (req, res) => {
-  const { name } = req.body;
+  const { name, branch, email, prn, rollno } = req.body;
 
-  console.log(name);
-  const newData = new data({
-    fullName: name,
-    branch: "demo",
-    email: "demo",
-    prn: "demo",
-    rollno: "demo",
-  });
-  await newData.save();
+  // console.log(name);
+  const student = await data.findOne({ email });
+  if (student) {
+    res.status(403).send("Form already filled by this email");
+  } else {
+    const newData = new data({
+      fullName: name,
+      branch,
+      email,
+      prn,
+      rollno,
+    });
+    await newData.save();
 
-  res.status(200).send("Registration successful!");
+    res.status(200).send("Registration successful!");
+  }
 });
 
 app.listen(port, () => {
