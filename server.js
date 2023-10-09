@@ -14,9 +14,7 @@ const dataSchema = new mongoose.Schema({
   fullName: String,
   branch: String,
   email: String,
-  prn: String,
-  rollno: String,
-  phoneno: String,
+  phone: String,
   feedback: String,
 });
 
@@ -32,7 +30,7 @@ app.get("/", (req, res) => {
 });
 
 app.post("/submit", async (req, res) => {
-  const { name, branch, email, prn, rollno, phone, feedback } = req.body;
+  const { name, branch, email, phone, feedback } = req.body;
 
   // console.log(name);
   const student = await data.findOne({ email });
@@ -43,8 +41,6 @@ app.post("/submit", async (req, res) => {
       fullName: name,
       branch,
       email,
-      prn,
-      rollno,
       phone,
       feedback,
     });
